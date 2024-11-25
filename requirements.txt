@@ -1,0 +1,10 @@
+gradio
+pdfplumber
+langchain_groq
+langchain
+langchain_community
+pydantic
+tqdm
+nltk
+scikit-learn
+diffusers
