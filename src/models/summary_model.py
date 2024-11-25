@@ -3,6 +3,9 @@ from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from typing import List, Dict
 from src.config import GROQ_API_KEY
+import json
+
+exmaple_json=json.load('assets\example.json')
 
 class SummaryJSON(BaseModel):
     keywords: Dict[str, List[str]] = Field({}, description="Keywords for location, lighting, and tone")
@@ -22,8 +25,16 @@ def get_summary_json(prompt):
     try:
         structured_llm = llm.with_structured_output(SummaryJSON, method="json_mode")
         system_prompt = """
-        Extract keywords from the script related to location, lighting, and tone, 
-        and provide descriptions inspired by Rajasthan/Mughal palaces.
+                            Extract keywords from the script related to the following aspects: location, lighting, and tone of the scene.
+                            Organize the output in JSON format with:
+
+                            Keywords for each aspect, such as location, lighting, and tone.
+                            Note that you have to provide all the different location mentioned in the script and they should be in the lines of room or courtyard or garden or hallway.
+                            Elaborative descriptions of each location mentioned, drawing inspiration from Rajasthan/Mughal palaces only, while providing rich historical and cultural context in under 50 words.
+                            Improvement tips for enhancing the lighting and tone. The tips should emphasize capturing the grandeur, warmth, and authenticity of Rajasthan/Mughal historical settings only.
+                            Ensure that each section—keywords, location descriptions, and improvement tips—appears as a separate key-value pair in the JSON structure.
+
+                            json_structure: {example_json}
         """
         prompt_template = ChatPromptTemplate.from_messages(
             [("system", system_prompt), ("human", "{input}")]

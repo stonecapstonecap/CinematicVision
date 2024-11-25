@@ -1,0 +1,16 @@
+{{
+    "keywords": {{
+        "location": ["example_location"],
+        "lighting": ["example_lighting"],
+        "tone": ["example_tone"]
+    }},
+    "elaborative_descriptions": {{
+        "location_name": "detailed description here"
+    }},
+    "scene_improvement_tips": {{
+        "Lighting": "suggestions here",
+        "Tone": "suggestions here",
+        "Composition": "suggestions here",
+        "Color palette": "suggestions here"
+    }}
+}}
